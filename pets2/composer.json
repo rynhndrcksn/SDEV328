@@ -1,0 +1,16 @@
+{
+  "name": "/328/pets2",
+  "authors": [
+    {
+      "name": "Shawn Potter",
+      "email": "spotter@mail.greenriver.edu"
+    },
+    {
+      "name": "Ryan Hendrickson",
+      "email": "rhendrickson11@mail.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}

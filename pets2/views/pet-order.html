@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+				integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+	<title>Pets R Us</title>
+</head>
+<body>
+<div class="container">
+	<h1>Order a pet!</h1>
+
+	<form action="order2" method="POST">
+		<div class="input-group">
+			<label for="petType">What kind of pet would you like to order?</label>
+			<input type="text" id="petType" name="petType">
+		</div>
+
+		<select class="pet-color mb-2" aria-label="pick your pets color" name="petColor" id="petColor">
+			<option selected>Choose a pet color</option>
+			<option value="red">Red</option>
+			<option value="green">Green</option>
+			<option value="blue">Blue</option>
+		</select>
+		<br>
+		<input type="submit" id="submit-order" value="Place Order">
+	</form>
+</div>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

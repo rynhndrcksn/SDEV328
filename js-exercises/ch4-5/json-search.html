@@ -1,0 +1,43 @@
+<!--
+	@author: Ryan H.
+	@version:
+	json-search.html allows the user to search for names, and returns them if they exist in json-search.js
+-->
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+				integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+	<title>JSON Search</title>
+</head>
+<body>
+<div class="container">
+	<h1>Input a name to search for:</h1>
+	<div class="col-4">
+		<div class="input-group mb-3">
+			<input type="text" class="form-control col-4" placeholder="Jane Doe" aria-label="Name to search for"
+						 aria-describedby="button-search" id="name-search">
+			<button class="btn btn-outline-primary" type="button" id="button-search">Search</button>
+		</div>
+	</div>
+	<div id="result">
+
+	</div>
+</div>
+
+<!-- Project's JS -->
+<script src="json-search.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>
