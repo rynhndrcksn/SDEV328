@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Other Meta Tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <title>Pets R Us</title>
+</head>
+<body>
+<div class="container">
+  <form action="order3" method="post">
+    <fieldset>
+      <legend>Pet Size:</legend>
+    </fieldset>
+    <div class="form-group">
+      <repeat group="{{ @sizes }}" value="{{ @size }}">
+        <div class="form-check">
+          <input type="radio" name="petSize" id="{{ @size }}" value="{{ @size }}">
+          <label for="{{ @size }}" class="text-capitalize">{{ @size }}</label>
+        </div>
+      </repeat>
+    </div>
+    <fieldset>
+      <legend>Pet Accessories:</legend>
+    </fieldset>
+    <div class="form-group">
+      <repeat group="{{ @accessories }}" value="{{ @accessory }}">
+        <div class="form-check">
+          <input type="checkbox" name="petAccessories[]" id="{{ @accessory }}" value="{{ @accessory }}">
+          <label for="{{ @accessory }}" class="text-capitalize">{{ @accessory }}</label>
+        </div>
+      </repeat>
+    </div>
+    <input type="submit" class="btn btn-outline-secondary">
+  </form>
+</div>
+
+
+<!-- jQuery first, then Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<!-- Optional JavaScript -->
+</body>
+</html>

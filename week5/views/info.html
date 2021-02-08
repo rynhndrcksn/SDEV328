@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+	<title>{{ @title }}</title>
+</head>
+<body>
+<div class="container">
+	<h1>{{ @title }}</h1>
+	<p>{{ @username }} is logged in with {{ @password }}</p>
+
+	<h3>Temperature</h3>
+	<p>Fahrenheit temp: {{ @ftemp }}º</p>
+	<p>Celsius temp: {{ round((@ftemp-32) * (5/9), 2) }}º</p>
+
+	<h3>About Ryan</h3>
+	<p>I like the color {{ @color }}.</p>
+	<p>The circumference of a circle with a radius of 10 is approximately: {{ round( ( (2*@pi) * @radius) , 2) }}.</p>
+
+	<h3>Here's some fruit:</h3>
+	<!-- repeat lets you loop through an array, group is your array name, value is the placeholder for each-->
+	<ul>
+		<repeat group="{{ @fruits }}" value="{{ @fruit }}">
+			<li class="text-capitalize">{{ @fruit }}</li>
+		</repeat>
+	</ul>
+
+	<h3>Here's employee's salaries:</h3>
+	<!-- repeat lets you loop through an ASSOCIATIVE array, group is your array name, key is the key in the associative
+	 array, value is the placeholder for each-->
+	<ul>
+		<repeat group="{{ @salaries }}" key="{{ @employee }}" value="{{ @salary }}">
+			<li class="text-capitalize">{{ @employee }} earns ${{ number_format(@salary, 2, '.', ',') }}</li>
+		</repeat>
+	</ul>
+
+	<h3>Conditionals:</h3>
+	<!-- check will check a conditional and true prints if it's true, false print if it's false	-->
+	<check if="{{ @num == 5 }}">
+		<true>
+			<p>Num equals 5!</p>
+		</true>
+		<false>
+			<p>Num doesn't equal 5!</p>
+		</false>
+	</check>
+	<check if="{{ @preferredCustomer }}">
+		<p>Thank you preferred customer!</p>
+	</check>
+</div>
+</body>
+</html>
