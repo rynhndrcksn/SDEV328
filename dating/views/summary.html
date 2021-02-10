@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+				integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+	<!-- our CSS -->
+	<link rel="stylesheet" href="styles/main.css">
+
+	<title>Summary</title>
+</head>
+<body>
+
+<!-- NAVBAR START -->
+<include href="views/includes/navbar.html"></include>
+<!-- NAVBAR END -->
+
+<!-- START MAIN CONTENT -->
+<div class="container mt-5 border border-3 border-light">
+	<div class="row">
+		<!-- START LEFT COLUMN -->
+		<div class="col-md-6">
+			<div class="card mt-3">
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">Name: {{ ucfirst(@SESSION.fname) }} {{ ucfirst(@SESSION.lname) }}</li>
+					<li class="list-group-item">Gender: {{ ucfirst(@SESSION.gender) }}</li>
+					<li class="list-group-item">Age: {{ @SESSION.age }}</li>
+					<li class="list-group-item">Phone: {{ @SESSION.phone }}</li>
+					<li class="list-group-item">Email: {{ @SESSION.email }}</li>
+					<li class="list-group-item">State: {{ ucfirst(@SESSION.state) }}</li>
+					<li class="list-group-item">Seeking: {{ ucfirst(@SESSION.seeking) }}</li>
+					<li class="list-group-item">Interests:
+						<repeat group="{{ @SESSION.indoorInterests }}" value="{{ @interest }}">
+							<span> {{ @interest }},</span>
+						</repeat>
+						<repeat group="{{ @SESSION.outdoorInterests }}" value="{{ @interest }}">
+							<span> {{ @interest }},</span>
+						</repeat>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- END LEFT COLUMN -->
+		<!-- START RIGHT COLUMN -->
+		<div class="col-md-6">
+			<img id="user-icon" class="img-fluid rounded mb-5 mx-auto d-none d-md-block" src="images/user-icon.svg" alt="Default user icon">
+			<p id="bio-title"><span class="float-left">Biography</span><br></p>
+			<div id="bio-section" class="text-center">
+				<p>{{ @SESSION.biography }}</p>
+			</div>
+		</div>
+		<!-- END RIGHT COLUMN -->
+	</div>
+
+	<div class="text-center mt-3">
+		<button type="submit" class="btn btn-primary">Contact Me!</button>
+	</div>
+</div>
+<!-- END MAIN CONTENT -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+</body>
+</html>

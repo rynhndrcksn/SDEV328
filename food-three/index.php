@@ -34,7 +34,7 @@ $f3->route('GET /', function() {
 $f3->route('GET|POST /order', function($f3) {
 
 	// if the form has been submitted
-	if ($_SESSION['REQUEST_METHOD'] == 'POST') {
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// gather info from order and validate it
 		if (validFood($_POST['food'])) {
 			$_SESSION['food'] = $_POST['food'];
