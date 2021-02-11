@@ -7,7 +7,7 @@
 		<div class="input-group">
 			<label for="food"><span class="text-danger">*</span> What would you like to order?</label>
 			<br>
-			<input type="text" id="food" name="food">
+			<input type="text" id="food" name="food" value="{{ @userFood }}">
 			<br>
 			<check if="{{ isset(@errors['food']) }}">
 				<span class="text-danger">{{ @errors['food'] }}</span>
@@ -15,10 +15,16 @@
 		</div>
 		<repeat group="{{ @meals }}" value="{{ @meal }}">
 			<div class="form-check">
-				<input class="form-check-input" type="radio" name="meal" id="{{@meal}}" value="{{@meal}}">
+				<input class="form-check-input" type="radio" name="meal" id="{{@meal}}" value="{{@meal}}"
+				<check if="{{ @meal == @userMeal }}">
+					checked
+				</check>>
 				<label class="form-check-label text-capitalize" for="{{@meal}}">{{@meal}}</label>
 			</div>
 		</repeat>
+		<check if="{{ isset(@errors['meal']) }}">
+			<span class="text-danger">{{ @errors['meal'] }}</span>
+		</check>
 		<input type="submit" id="submit-order" value="Next >>" class="btn btn-primary mt-2">
 	</form>
 </div>

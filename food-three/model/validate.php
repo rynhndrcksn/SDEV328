@@ -7,12 +7,35 @@
  */
 
 /**
- * returns true if not empty
+ * returns true if not empty and contains only letters
  * @param $food
  * @return bool
  */
 function validFood($food): bool {
-	return !empty(prep_input($food));
+	return !empty(prep_input($food)) && ctype_alpha(prep_input($food));
+}
+
+/**
+ * returns true if $meal is a valid meal
+ * @param $meal
+ * @return bool
+ */
+function validMeal($meal): bool {
+	return in_array($meal, getMeals());
+}
+
+/**
+ * returns true if $conds contains valid condiments
+ * @param $conds
+ * @return bool
+ */
+function validConds($conds): bool {
+	foreach ($conds as $cond) {
+		if (!in_array($cond, getCondiments())) {
+			return false;
+		}
+	}
+	return true;
 }
 
 /**
