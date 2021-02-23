@@ -1,0 +1,21 @@
+{
+  "name": "grc-recipes",
+  "description": "GRC Recipes is a web app built with the Fat Free Framework (F3) that allows users to submit their own recipes to the site.",
+  "type": "project",
+  "readme": "README.md",
+  "authors": [
+    {
+      "name": "Patrick Dang",
+      "email": "pdang2@mail.greenriver.edu",
+      "role": "Developer"
+    },
+    {
+      "name": "Ryan Hendrickson",
+      "email": "rhendrickson11@mail.greenriver.edu",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}

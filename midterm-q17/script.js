@@ -20,5 +20,5 @@ average = (arr) => {
 		}
 	}
 	let average = (sum/nums);
-	console.log('Average is ' + average);
+	console.log('Average is ' + average.toFixed(3));
 }

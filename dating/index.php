@@ -14,7 +14,8 @@ session_start();
 
 // require autoload file
 require_once ('vendor/autoload.php');
-require_once ('model/data-layer.php');
+$validator = new Validation();
+$dataLayer = new DataLayer();
 
 // create an instance of the base class (fat-free framework)
 $f3 = Base::instance();
@@ -27,9 +28,11 @@ $f3->route('GET /', function() {
 });
 
 // start our signup routes (1/3)
-$f3->route('GET|POST /sign-up-1', function($f3) {
+$f3->route('GET|POST /sign-up-1', function($f3) use ($dataLayer) {
 	// set the gender radio buttons
-	$f3->set('gens', getGens());
+	$f3->set('gens', $dataLayer->getGens());
+
+ // TODO: FINISH ADDING $VALIDATOR AND $DATALAYER TO INDEX
 
 	// create a new view, then sends it to the client
 	$view = new Template();
