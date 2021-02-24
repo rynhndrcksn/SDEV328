@@ -2,7 +2,7 @@
 /**
  *  * @author Ryan H.
  * @version https://github.com/rynhndrcksn/dating
- * Class Validation that holds a bunch of validation methods for the web app
+ * Class: Validation - holds validation methods for the web app
  */
 class Validation
 {
@@ -24,26 +24,50 @@ class Validation
 		return $age > 17 && $age < 119;
 	}
 
+	function validGender($gender): bool
+	{
+		return in_array($gender, $this->_dataLayer->getGens());
+	}
+
 	function validPhone($phone): bool
 	{
-		$phone = filter_var($phone,FILTER_SANITIZE_NUMBER_INT);
-		$phone = str_replace("-", "", $phone);
-		return $phone < 15 && $phone > 9;
+		return preg_match('/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/', $phone) || preg_match('/^[0-9]{10}+$/', $phone);
 	}
 
-	function validEmail($email)
+	function validEmail($email): bool
 	{
-		return filter_var($email, FILTER_SANITIZE_EMAIL);
+		return filter_var($email, FILTER_VALIDATE_EMAIL);
 	}
 
-	function validOutdoor($outdoor)
+	function validState($state): bool
 	{
-
+		return in_array($state, $this->_dataLayer->getStates());
 	}
 
-	function validIndoor($indoor)
+	function validIndoor($indoor): bool
 	{
+		$valid = false;
+		foreach ($indoor as $item) {
+			if (in_array($item, $this->_dataLayer->getIndoor())) {
+				$valid = true;
+			} else {
+				$valid = false;
+			}
+		}
+		return $valid;
+	}
 
+	function validOutdoor($outdoor): bool
+	{
+		$valid = false;
+		foreach ($outdoor as $item) {
+			if (in_array($item, $this->_dataLayer->getOutdoor())) {
+				$valid = true;
+			} else {
+				$valid = false;
+			}
+		}
+		return $valid;
 	}
 
 	/**
