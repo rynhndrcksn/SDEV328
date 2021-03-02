@@ -11,14 +11,15 @@ error_reporting(E_ALL);
 
 // require autoload file
 require_once ('vendor/autoload.php');
+require $_SERVER['DOCUMENT_ROOT'] . "/../includes/config.php";
 
 // create a session
 session_start();
 
 // instantiate the classes
 $f3 = Base::instance();
-$validator = new Validate();
-$dataLayer = new DataLayer();
+$dataLayer = new DataLayer($dbh);
+$validator = new Validate($dataLayer);
 $order = new Order();
 $controller = new Controller($f3);
 
@@ -31,48 +32,25 @@ $f3->route('GET /', function() use ($controller) {
 });
 
 // define an order route
-$f3->route('GET|POST /order', function() use ($controller, $order, $dataLayer, $validator) {
+$f3->route('GET|POST /order', function() use ($controller) {
 	$controller->order();
 });
 
 // we can only use POST if the form method is POST, otherwise we need to use GET as GET is used for typing in the
 // URL, hyperlinks, and most other things
 // define an order2 route
-$f3->route('GET|POST /order2', function($f3) use ($order, $validator, $dataLayer) {
-
-	// TODO: Move all this stuff to controller.php
-
-	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		if (isset($_POST['condiments'])) {
-			$userConds = $_POST['condiments'];
-			if ($validator->validConds($userConds)) {
-				// since our object is stored in $_SESSION, we can just set the condiments with implode
-				$_SESSION['order']->setCondiments(implode(', ', $userConds));
-			} else {
-				$f3->set('errors["conds"]', 'Not a valid condiment!');
-			}
-		}
-		$f3->reroute('summary');
-	}
-
-	$f3->set('condiments', $dataLayer->getCondiments());
-
-	$view = new Template();
-	echo $view->render('views/order2.html');
+$f3->route('GET|POST /order2', function() use ($controller) {
+	$controller->order2();
 });
 
-// define an order route
-$f3->route('GET|POST /summary', function() {
+// define a summary route
+$f3->route('GET|POST /summary', function() use ($controller) {
+	$controller->summary();
+});
 
-	echo '<pre>';
-	var_dump($_SESSION);
-	echo '</pre>';
-
-	$view = new Template();
-	echo $view->render('views/summary.html');
-
-	// clear the SESSION array
-	session_destroy();
+//Define an order summary route
+$f3->route('GET /order-summary', function() use ($controller) {
+	$controller->orderSummary();
 });
 
 // run fat free HAS TO BE THE LAST THING IN FILE

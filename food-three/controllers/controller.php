@@ -60,4 +60,53 @@ class Controller
 		$view = new Template();
 		echo $view->render('views/order.html');
 	}
+
+	public function order2()
+	{
+		global $validator;
+		global $dataLayer;
+
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			if (isset($_POST['condiments'])) {
+				$userConds = $_POST['condiments'];
+				if ($validator->validConds($userConds)) {
+					// since our object is stored in $_SESSION, we can just set the condiments with implode
+					$_SESSION['order']->setCondiments(implode(', ', $userConds));
+				} else {
+					$this->_f3->set('errors["conds"]', 'Not a valid condiment!');
+				}
+			}
+			if (empty($this->_f3->get('errors'))) {
+				$this->_f3->reroute('/summary');
+			}
+		}
+
+		$this->_f3->set('condiments', $dataLayer->getCondiments());
+
+		$view = new Template();
+		echo $view->render('views/order2.html');
+	}
+
+	public function summary()
+	{
+		global $dataLayer;
+
+		// write to database
+		$dataLayer->saveOrder($_SESSION['order']);
+
+		$view = new Template();
+		echo $view->render('views/summary.html');
+
+		// clear the SESSION array
+		session_destroy();
+	}
+
+	public function orderSummary()
+	{
+		global $dataLayer;
+
+		$this->_f3->set('orders', $dataLayer->getOrders());
+		$view = new Template();
+		echo $view->render('views/order-summary.html');
+	}
 }
