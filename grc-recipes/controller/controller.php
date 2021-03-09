@@ -94,4 +94,10 @@ class Controller
 		echo $view->render('views/login.html');
 	}
 
+	function privacy()
+	{
+		$view = new Template();
+		echo $view->render('views/privacy-policy.html');
+	}
+
 }

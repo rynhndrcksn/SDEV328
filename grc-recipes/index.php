@@ -41,5 +41,10 @@ $f3->route('GET|POST /login', function() use ($controller) {
 		$controller->login();
 });
 
+// route to login page
+$f3->route('GET|POST /privacy', function() use ($controller) {
+	$controller->privacy();
+});
+
 //Run fat free
 $f3->run();
