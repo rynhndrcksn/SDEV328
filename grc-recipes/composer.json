@@ -1,5 +1,5 @@
 {
-  "name": "grc-recipes",
+  "name": "rhendric/grc-recipes",
   "description": "GRC Recipes is a web app built with the Fat Free Framework (F3) that allows users to submit their own recipes to the site.",
   "type": "project",
   "readme": "README.md",
@@ -17,5 +17,8 @@
   ],
   "require": {
     "bcosca/fatfree-core": "dev-master"
+  },
+  "autoload": {
+    "classmap": ["classes/", "controller/", "model/"]
   }
 }

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>JSON Demo</title>
+</head>
+<body>
+<h1>JSON Demo!</h1>
+
+<button id="btn">Click me</button>
+
+<div id="result">
+
+</div>
+
+<script src="//code.jquery.com/jquery.js"></script>
+
+<script>
+	// grab out button, and on a click perform an anonymous functions
+	$('#btn').on('click', function () {
+		// grab our json info from students.json, put it in result
+		$.getJSON('students.json', function(result) {
+			// take our result, pass it into a 'foreach loop'
+			$.each(result, function (index, item) {
+				// take our result, and output it as HTML
+				$('#result').append(
+					'<p>First name: ' + item.firstName + '</p>' +
+					'<p>Last name: ' + item.lastName + '</p>' +
+					'<p>GPA: ' + item.gpa + '</p>'
+				);
+			})
+		});
+	});
+</script>
+</body>
+</html>

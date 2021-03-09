@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Dog viewer</title>
+</head>
+<body>
+<h1>Dog viewer!</h1>
+
+<label for="dogPicker">Select a breed:</label>
+<select name="dogPicker" id="dogPicker"></select>
+<br>
+<img id="dogImage" alt="" src="">
+
+<script src="//code.jquery.com/jquery.js"></script>
+
+<script>
+	// grab our json info from the dog API
+	let url = 'https://dog.ceo/api/breeds/list/all';
+	$.getJSON(url, function(result) {
+		// take our result, pass it into a 'foreach loop'
+		$.each(result.message, function (item) {
+			// take our result, and output it
+			$('#dogPicker').append('<option value="'+ item +'">' + item + '</option>');
+		});
+	});
+
+	// display random image of selected dog
+	$('#dogPicker').on('change', function() {
+		let breed = $('#dogPicker').val();
+		let url = 'https://dog.ceo/api/breed/' + breed + '/images/random';
+		$.getJSON(url, function(result) {
+			let imgPath = result.message;
+			$('#dogImage').attr('src', imgPath).attr('alt', 'picture of a ' + breed);
+		});
+	});
+</script>
+</body>
+</html>
