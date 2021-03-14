@@ -54,7 +54,7 @@ class Validate
 	 */
 	function validPassword($password): bool
 	{
-		return preg_match('"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,64}$"', $password);
+		return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,64}$/', $password);
 	}
 
 	/**
