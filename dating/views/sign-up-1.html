@@ -32,6 +32,9 @@
 						<input type="text" class="form-control" id="fname" name="fname" placeholder="Jane/John"
 									 value="{{ @userFirst }}">
 						<label for="fname">First Name</label>
+						<div id="fnameHelpBlock" class="form-text">
+							Max of 20 letters.
+						</div>
 						<check if="{{ isset(@errors['fname']) }}">
 							<p class="text-danger">{{ @errors['fname'] }}</p>
 						</check>
@@ -42,6 +45,9 @@
 						<input type="text" class="form-control" id="lname" name="lname" placeholder="Smith"
 									 value="{{ @userLast }}">
 						<label for="lname">Last Name</label>
+						<div id="lnameHelpBlock" class="form-text">
+							Max of 30 letters.
+						</div>
 						<check if="{{ isset(@errors['lname']) }}">
 							<p class="text-danger">{{ @errors['lname'] }}</p>
 						</check>
@@ -75,7 +81,10 @@
 					<div class="form-floating mt-3 mb-3">
 						<input type="tel" class="form-control" id="phone" name="phone" placeholder="(253) 555-5555"
 									 value="{{ @userPhone }}">
-						<label for="phone">Phone Number: (2065550505 or 206-555-0505 format)</label>
+						<label for="phone">Phone Number</label>
+						<div id="phoneHelpBlock" class="form-text">
+							2065550505 or 206-555-0505 format.
+						</div>
 						<check if="{{ isset(@errors['phone']) }}">
 							<p class="text-danger">{{ @errors['phone'] }}</p>
 						</check>

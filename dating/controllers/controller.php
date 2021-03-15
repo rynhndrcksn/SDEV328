@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * controller is our controller for the dating web app. This file contains methods that are called in our index.php
  * PHP version: 7.3
@@ -12,12 +13,16 @@ class Controller
 	private $_f3;
 	private $_validator;
 	private $_dataLayer;
+	private $_database;
 
 	public function __construct($f3)
 	{
 		$this->_f3 = $f3;
 		$this->_validator = new Validation();
 		$this->_dataLayer = new DataLayer();
+		// require PDO - if it is on top of the file, it won't be passed in properly
+		require_once $_SERVER['DOCUMENT_ROOT'] . "/../includes/config.php";
+		$this->_database = new Database($dbh);
 	}
 
 	/**
@@ -25,7 +30,7 @@ class Controller
 	 */
 	function home()
 	{
-		// create a new view and send the user to home.html
+		// render home.html
 		$view = new Template();
 		echo $view->render('views/home.html');
 	}
@@ -93,7 +98,7 @@ class Controller
 		$this->_f3->set('userGen', isset($userGen) ? $userGen : "");
 		$this->_f3->set('userPhone', isset($userPhone) ? $userPhone : "");
 
-		// create a new view, then sends it to the client
+		// render sign-up-1.html
 		$view = new Template();
 		echo $view->render('views/sign-up-1.html');
 	}
@@ -112,8 +117,6 @@ class Controller
 			$userEmail = $_POST['email'];
 			$userState = $_POST['state'];
 			$userSeeking = $_POST['seeking'];
-			// neither of these are working to filter the input? It's the most bizarre thing
-			//$userBio = filter_var($_POST['biography'], FILTER_SANITIZE_STRING);
 			$userBio = $this->_validator->prep_input($_POST['biography']);
 
 			// validate email
@@ -154,7 +157,7 @@ class Controller
 		$this->_f3->set('userSeeking', isset($userSeeking) ? $userSeeking : "");
 		$this->_f3->set('userBio', isset($userBio) ? $userBio : "");
 
-		// create a new view, then sends it to the client
+		// render sign-up-2.html
 		$view = new Template();
 		echo $view->render('views/sign-up-2.html');
 	}
@@ -169,34 +172,34 @@ class Controller
 		$this->_f3->set('outdoors', $this->_dataLayer->getOutdoor());
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			$userIndoors = $_POST['indoorInterests'];
-			$userOutdoors = $_POST['outdoorInterests'];
-
 			// validate indoor activities
 			if (isset($userIndoors)) {
-				if (!$this->_validator->validIndoor($userIndoors)) {
+				if (!$this->_validator->validIndoor($_POST['indoorInterests'])) {
 					$this->_f3->set('errors["indoor"]', 'Not a valid indoor activity...');
 				}
 			}
 
 			// validate outdoor activities
 			if (isset($userOutdoors)) {
-				if (!$this->_validator->validOutdoor($userOutdoors)) {
+				if (!$this->_validator->validOutdoor($_POST['outdoorInterests'])) {
 					$this->_f3->set('errors["outdoor"]', 'Not a valid outdoor activity...');
 				}
 			}
 
 			// if there are no errors, assign the interests to our object then redirect to summary
 			if (empty($this->_f3->get('errors'))) {
+				$userIndoors = implode(', ', $_POST['indoorInterests']);
+				$userOutdoors = implode(', ', $_POST['outdoorInterests']);
+
 				if (isset($userIndoors)) {
 					$_SESSION['member']->setIndoorInterests($userIndoors);
 				} else {
-					$_SESSION['member']->setIndoorInterests(array('no indoor activities'));
+					$_SESSION['member']->setIndoorInterests('no indoor activities selected');
 				}
 				if (isset($userOutdoors)) {
 					$_SESSION['member']->setOutdoorInterests($userOutdoors);
 				} else {
-					$_SESSION['member']->setOutdoorInterests(array('no outdoor activities'));
+					$_SESSION['member']->setOutdoorInterests('no outdoor activities selected');
 				}
 
 				$this->_f3->reroute('/summary');
@@ -206,17 +209,32 @@ class Controller
 		$this->_f3->set('userIndoors', isset($userIndoors) ? $userIndoors : []);
 		$this->_f3->set('userOutdoors', isset($userOutdoors) ? $userOutdoors : []);
 
-		// create a new view, then sends it to the client
+		// render sign-up-3.html
 		$view = new Template();
 		echo $view->render('views/sign-up-3.html');
 	}
 
 	function summary()
 	{
+
+		// save member to database
+		$this->_database->insertMember($_SESSION['member']);
+
+		// render summary.html
 		$view = new Template();
 		echo $view->render('views/summary.html');
 
 		// clear our $_SESSION
 		session_destroy();
+	}
+
+	function admin()
+	{
+		// get all the members that have been saved to the DB
+		$this->_f3->set('members', $this->_database->getMembers());
+
+		// render admin.html
+		$view = new Template();
+		echo $view->render('views/admin.html');
 	}
 }

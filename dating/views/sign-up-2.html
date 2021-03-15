@@ -35,6 +35,9 @@
 						<input type="text" class="form-control" id="email" name="email" placeholder="example@email.com"
 									 value="{{ @userEmail }}">
 						<label for="email">Email</label>
+						<div id="emailHelpBlock" class="form-text">
+							Max of 50 characters.
+						</div>
 						<check if="{{ isset(@errors['email']) }}">
 							<p class="text-danger">{{ @errors['email'] }}</p>
 						</check>

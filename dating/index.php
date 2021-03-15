@@ -46,5 +46,10 @@ $f3->route('GET|POST /summary', function() use ($controller) {
 	$controller->summary();
 });
 
+// admin route
+$f3->route('GET /admin', function() use ($controller) {
+	$controller->admin();
+});
+
 // run fat free HAS TO BE THE LAST THING IN FILE
 $f3->run();

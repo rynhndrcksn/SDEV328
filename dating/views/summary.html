@@ -38,12 +38,7 @@
 					<li class="list-group-item">Seeking: {{ ucfirst(@SESSION.member->getSeeking()) }}</li>
 					<check if="{{ @SESSION.member instanceof PremiumMember }}">
 						<li class="list-group-item">Interests:
-							<repeat group="{{ @SESSION.member->getIndoorInterests() }}" value="{{ @interest }}">
-								<span> {{ @interest }},</span>
-							</repeat>
-							<repeat group="{{ @SESSION.member->getOutdoorInterests() }}" value="{{ @interest }}">
-								<span> {{ @interest }},</span>
-							</repeat>
+							<p>{{ @SESSION.member->getIndoorInterests() }}, {{ @SESSION.member->getOutdoorInterests() }}</p>
 						</li>
 					</check>
 				</ul>

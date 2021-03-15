@@ -11,5 +11,6 @@
   },
   "autoload": {
     "classmap": ["model/", "classes/", "controllers/"]
-  }
+  },
+  "description": "Dating website that was worked on in a back end framework class at college."
 }

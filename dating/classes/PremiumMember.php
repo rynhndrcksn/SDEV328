@@ -12,33 +12,33 @@ class PremiumMember extends Member
 	private $_outdoorInterests;
 
 	/**
-	 * @return array - user's indoor interests
+	 * @return string - user's indoor interests
 	 */
-	public function getIndoorInterests(): array
+	public function getIndoorInterests(): string
 	{
 		return $this->_indoorInterests;
 	}
 
 	/**
-	 * @param array $indoorInterests - user's indoor interests
+	 * @param string $indoorInterests - user's indoor interests
 	 */
-	public function setIndoorInterests(array $indoorInterests)
+	public function setIndoorInterests(string $indoorInterests)
 	{
 		$this->_indoorInterests = $indoorInterests;
 	}
 
 	/**
-	 * @return array - user's outdoor interests
+	 * @return string - user's outdoor interests
 	 */
-	public function getOutdoorInterests(): array
+	public function getOutdoorInterests(): string
 	{
 		return $this->_outdoorInterests;
 	}
 
 	/**
-	 * @param array $outdoorInterests - user's outdoor interests
+	 * @param string $outdoorInterests - user's outdoor interests
 	 */
-	public function setOutdoorInterests(array $outdoorInterests)
+	public function setOutdoorInterests(string $outdoorInterests)
 	{
 		$this->_outdoorInterests = $outdoorInterests;
 	}
