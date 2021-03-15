@@ -71,6 +71,8 @@ class Controller
 				if (!$this->_validator->validGender($userGen)) {
 					$this->_f3->set('errors["gender"]', 'Not a valid gender');
 				}
+			} else {
+				$userGen = '';
 			}
 
 			// validate phone
