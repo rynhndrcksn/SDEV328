@@ -10,10 +10,38 @@ session_start();
 $valid = false;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	// connect to db
+	require $_SERVER['DOCUMENT_ROOT'].'/../includes/config.php';
+
+	// query db
+	$sql = 'SELECT * FROM users WHERE username = :username AND password = :password';
+	// inserting a new user:
+	// $sql = 'INSERT INTO users (username, password, authlevel) VALUES (:username, :password, :authlevel)';
+
+	// prepare statement
+	$statement = $dbh->prepare($sql);
+
+	// bind params
+	$username = $_POST['username'];
+	$password = sha1($_POST['password']);
+	$statement->bindParam(':username', $username, PDO::PARAM_STR);
+	$statement->bindParam(':password', $password, PDO::PARAM_STR);
+
+	// execute query
+	$statement->execute();
+
+	// make sure we get something gets returned
+	$count = $statement->rowCount(); // get however many rows we might have gotten
+
 	// check the login
-	if ($_POST['username'] == 'jshmo' && $_POST['password'] == 'shmo123') {
-		$_SESSION['loggedIn'] = $_POST['username'];
-		header('location: index.php');
+	if ($count == 1) {
+		//Send the user back where they came from
+		if (isset($_SESSION['page'])) {
+			$loc = $_SESSION['page'];
+		} else {
+			$loc = "index.php";
+		}
+		header("location: $loc");
 	} else {
 		$valid = true;
 	}
