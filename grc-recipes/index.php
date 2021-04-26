@@ -31,6 +31,11 @@ $f3->route('GET /', function() use ($controller) {
 		$controller->home();
 });
 
+// route to admin
+$f3->route('GET|POST /admin', function() use ($controller) {
+    $controller->admin();
+});
+
 // route to sign up page
 $f3->route('GET|POST /signup', function() use ($controller) {
     $controller->signup();
@@ -42,8 +47,18 @@ $f3->route('GET|POST /login', function() use ($controller) {
 });
 
 // route to login page
+$f3->route('GET /logout', function() use ($controller) {
+    $controller->logout();
+});
+
+// route to privacy page
 $f3->route('GET|POST /privacy', function() use ($controller) {
 	$controller->privacy();
+});
+
+// route to recipes page
+$f3->route('GET|POST /recipes', function() use ($controller) {
+    $controller->recipes();
 });
 
 //Run fat free

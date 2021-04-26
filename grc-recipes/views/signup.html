@@ -66,6 +66,9 @@
                         <check if="{{ isset(@errors['email']) }}">
                             <p class="text-danger">{{ @errors['email'] }}</p>
                         </check>
+                        <check if="{{ isset(@errors['uniqueEmail']) }}">
+                            <p class="text-danger">{{ @errors['uniqueEmail'] }}</p>
+                        </check>
                     </div>
 
                     <!-- USER USERNAME -->
@@ -78,6 +81,9 @@
                         </div>
                         <check if="{{ isset(@errors['username']) }}">
                             <p class="text-danger">{{ @errors['username'] }}</p>
+                        </check>
+                        <check if="{{ isset(@errors['uniqueUsername']) }}">
+                            <p class="text-danger">{{ @errors['uniqueUsername'] }}</p>
                         </check>
                     </div>
 
